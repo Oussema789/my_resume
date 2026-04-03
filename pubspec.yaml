@@ -66,6 +66,7 @@ flutter:
   assets:
     
     - assets/
+    - assets/Oussema_KHELIFI_Resume.pdf
     - assets/certificates/
     - assets/workshop/
     - assets/dashboard/

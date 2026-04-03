@@ -114,11 +114,21 @@ class _PortfolioWebsiteState extends State<PortfolioWebsite>
     );
   }
 
-  void _downloadCV() {
-    const cvPath = 'assets/Oussema_KHELIFI_Resume.pdf';
-    final anchor = html.AnchorElement(href: cvPath)
-      ..setAttribute('download', 'Oussema_KHELIFI_Resume.pdf')
-      ..click();
+  void _downloadCV() async {
+    // Using url_launcher to open the PDF in a new tab (works reliably on Vercel)
+    const cvUrl = '/assets/Oussema_KHELIFI_Resume.pdf';
+    final Uri uri = Uri.parse(cvUrl);
+
+    // For web, launch the URL - this will open the PDF in browser's PDF viewer
+    // and user can save it from there
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      // Fallback to the original AnchorElement method
+      final anchor = html.AnchorElement(href: cvUrl)
+        ..setAttribute('download', 'Oussema_KHELIFI_Resume.pdf')
+        ..click();
+    }
   }
 
   @override
