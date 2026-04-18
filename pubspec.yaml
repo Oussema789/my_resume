@@ -39,6 +39,7 @@ dependencies:
   google_fonts: ^8.0.2
   carousel_slider: ^5.1.2
   responsive_builder: ^0.7.1
+  provider: ^6.1.5+1
 
 dev_dependencies:
   flutter_test:
