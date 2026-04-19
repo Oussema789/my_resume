@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -375,14 +376,25 @@ class _PortfolioWebsiteState extends State<PortfolioWebsite>
   );
 
   void _downloadCV() async {
-    const cvUrl = '/assets/Oussema_KHELIFI_Resume.pdf';
-    final Uri uri = Uri.parse(cvUrl);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    } else {
-      final anchor = html.AnchorElement(href: cvUrl)
+    // Extract file ID from your Google Drive link
+    const String fileId = '1pjUQ2NctS2iTjaa6risUrGyBJmh8rl6K';
+    // Direct download URL (forces download instead of preview)
+    final String downloadUrl =
+        'https://drive.google.com/uc?export=download&id=$fileId';
+
+    if (kIsWeb) {
+      // Web: Use AnchorElement to trigger download
+      final anchor = html.AnchorElement(href: downloadUrl)
         ..setAttribute('download', 'Oussema_KHELIFI_Resume.pdf')
         ..click();
+    } else {
+      // Mobile / Desktop: Use url_launcher to open in browser
+      final Uri uri = Uri.parse(downloadUrl);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else {
+        throw Exception('Could not launch $downloadUrl');
+      }
     }
   }
 
