@@ -985,7 +985,7 @@ class _PortfolioWebsiteState extends State<PortfolioWebsite>
             runSpacing: 10,
             alignment: wrapAlign,
             children: [
-              _primaryBtn(s.heroCvBtn, Icons.download_rounded, _downloadCV, t),
+              //_primaryBtn(s.heroCvBtn, Icons.download_rounded, _downloadCV, t),
               _secondaryBtn(
                 s.heroContactBtn,
                 Icons.arrow_forward_rounded,
