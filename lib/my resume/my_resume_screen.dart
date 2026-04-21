@@ -440,12 +440,21 @@ class _PortfolioWebsiteState extends State<PortfolioWebsite>
   );
 
   void _downloadCV() async {
-    const String fileId = '1pjUQ2NctS2iTjaa6risUrGyBJmh8rl6K';
+    // Choose CV based on language
+    final String fileId = _isFr
+        ? '1ub3l6HDQI1m5ca1NghRAr8h4hcpiKREp' // French CV
+        : '1QShVh7E-qqArwZJIrdvAuC6alHu2yD6L'; // English CV
+
+    final String fileName = _isFr
+        ? 'Oussema_KHELIFI_CV_FR.pdf'
+        : 'Oussema_KHELIFI_CV_EN.pdf';
+
     final String downloadUrl =
         'https://drive.google.com/uc?export=download&id=$fileId';
+
     if (kIsWeb) {
       final anchor = html.AnchorElement(href: downloadUrl)
-        ..setAttribute('download', 'Oussema_KHELIFI_Resume.pdf')
+        ..setAttribute('download', fileName)
         ..click();
     } else {
       final Uri uri = Uri.parse(downloadUrl);
@@ -985,7 +994,7 @@ class _PortfolioWebsiteState extends State<PortfolioWebsite>
             runSpacing: 10,
             alignment: wrapAlign,
             children: [
-              //_primaryBtn(s.heroCvBtn, Icons.download_rounded, _downloadCV, t),
+              _primaryBtn(s.heroCvBtn, Icons.download_rounded, _downloadCV, t),
               _secondaryBtn(
                 s.heroContactBtn,
                 Icons.arrow_forward_rounded,
